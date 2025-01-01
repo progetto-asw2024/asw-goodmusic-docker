@@ -11,6 +11,7 @@ docker network create goodmusic-net
 docker volume create --driver local kafka_data
 docker volume create --driver local connessioni_db_data
 docker volume create --driver local recensioni_db_data
+docker volume create --driver local recensioni-seguite_db_data
 
 # Lancio i container
 docker run -d --network=goodmusic-net --name kafka -v kafka_data:/bitnami \
@@ -41,6 +42,7 @@ docker run -d --network=goodmusic-net --name recensioni-db \
   docker.io/postgres:latest
 
 docker run -d --network=goodmusic-net -p 5432:5432 --name recensioni-seguite-db \
+  -v recensioni-seguite_db_data:/var/lib/postgresql/data \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=postgres \
   -e POSTGRES_DB=recensioni-seguitedb \
