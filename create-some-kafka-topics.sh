@@ -15,6 +15,8 @@ done
 
 echo "Il container Kafka è in esecuzione!"
 
+sleep 10 # Attendo che kafka sia pronto
+
 # Ora esegui i comandi per creare i topic Kafka
 docker exec -it $KAFKA_DOCKER kafka-topics.sh --bootstrap-server localhost:9092 --create --if-not-exists --topic connessioni --replication-factor 1 --partitions 4
 docker exec -it $KAFKA_DOCKER kafka-topics.sh --bootstrap-server localhost:9092 --create --if-not-exists --topic recensioni --replication-factor 1 --partitions 4
